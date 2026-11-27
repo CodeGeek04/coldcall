@@ -1,0 +1,276 @@
+{
+  "id": "test-script",
+  "description": "Live test script covering all nine blocks. You: Shivam. Them: a friend playing Maria (front desk), then Dr. Patel.",
+  "segments": [
+    {
+      "speaker": "them",
+      "start": 0.5,
+      "end": 3.2,
+      "text": "Good morning, Cedar Dental, this is Maria.",
+      "label": {
+        "block": "gatekeeper",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 3.9,
+      "end": 8.1,
+      "text": "Hi Maria, this is Shivam from Brightline. Is Dr. Patel available?",
+      "label": {
+        "block": "gatekeeper",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 8.8,
+      "end": 11.1,
+      "text": "Can I ask what it's about?",
+      "label": {
+        "block": "gatekeeper",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 11.8,
+      "end": 16.4,
+      "text": "It's about the missed appointments on her schedule. Two minutes at most.",
+      "label": {
+        "block": "gatekeeper",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 17.1,
+      "end": 19.8,
+      "text": "Okay, hold on, I'll put you through.",
+      "label": {
+        "block": "gatekeeper",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 20.2,
+      "end": 21.4,
+      "text": "Dr. Patel speaking.",
+      "label": {
+        "block": "opener",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 22.1,
+      "end": 31,
+      "text": "Hi Dr. Patel, Shivam from Brightline. We help dental clinics fill cancelled appointments, and I'm calling because you just opened a second office.",
+      "label": {
+        "block": "opener",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 31.4,
+      "end": 38.3,
+      "text": "Could I take thirty seconds to explain why I called? Then you tell me if it's worth more.",
+      "label": {
+        "block": "hook",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 39,
+      "end": 45.2,
+      "text": "Look, I'm really busy, and we already have a reminder system. Just send me an email.",
+      "label": {
+        "block": "reluctant",
+        "stance": "reluctant"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 45.9,
+      "end": 52.4,
+      "text": "Totally fair, you already send reminders. Can I ask one quick question before I let you go?",
+      "label": {
+        "block": "reluctant",
+        "stance": "reluctant"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 53.1,
+      "end": 54.3,
+      "text": "Fine, one question.",
+      "label": {
+        "block": "reluctant",
+        "stance": "reluctant"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 55,
+      "end": 59.6,
+      "text": "When someone cancels the same morning, what happens to that slot today?",
+      "label": {
+        "block": "discovery",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 60.3,
+      "end": 69.2,
+      "text": "Honestly, it usually stays empty. My front desk calls the waitlist by hand, but by the time they reach someone it's too late.",
+      "label": {
+        "block": "discovery",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 69.9,
+      "end": 72.9,
+      "text": "How often does that happen in a week?",
+      "label": {
+        "block": "discovery",
+        "stance": "open"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 73.6,
+      "end": 78.6,
+      "text": "Maybe five or six times. It's a real problem at the new office.",
+      "label": {
+        "block": "discovery",
+        "stance": "open"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 79.3,
+      "end": 89.3,
+      "text": "That's exactly what we fix. When someone cancels, we text your waitlist automatically, and the first person to reply gets the slot, usually within fifteen minutes.",
+      "label": {
+        "block": "pitch",
+        "stance": "open"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 90,
+      "end": 94.3,
+      "text": "Interesting. Does it work with our booking software? We use Dentrix.",
+      "label": {
+        "block": "pitch",
+        "stance": "open"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 95,
+      "end": 100,
+      "text": "Yes, it syncs both ways, so your front desk doesn't type anything twice.",
+      "label": {
+        "block": "pitch",
+        "stance": "open"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 100.7,
+      "end": 103.4,
+      "text": "Okay, what does something like that cost?",
+      "label": {
+        "block": "ask",
+        "stance": "ready"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 104.1,
+      "end": 115.2,
+      "text": "It depends on the number of chairs. The easiest way is a fifteen minute demo on your own schedule. Would Thursday at eleven or Friday at two work better?",
+      "label": {
+        "block": "ask",
+        "stance": "ready"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 115.9,
+      "end": 117.5,
+      "text": "Thursday at eleven works.",
+      "label": {
+        "block": "ask",
+        "stance": "ready"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 118.2,
+      "end": 121.2,
+      "text": "Great. What's the best email for the invite?",
+      "label": {
+        "block": "logistics",
+        "stance": "ready"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 121.9,
+      "end": 125.4,
+      "text": "Send it to patel at cedar dental dot com.",
+      "label": {
+        "block": "logistics",
+        "stance": "ready"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 126.1,
+      "end": 131.5,
+      "text": "Got it. Thursday at eleven, invite going to patel at cedar dental dot com.",
+      "label": {
+        "block": "logistics",
+        "stance": "ready"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 132.2,
+      "end": 136,
+      "text": "Perfect. I have to get back to a patient now.",
+      "label": {
+        "block": "exit",
+        "stance": "open"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 136.7,
+      "end": 139.8,
+      "text": "Of course. Thanks, Dr. Patel, talk Thursday. Bye.",
+      "label": {
+        "block": "exit",
+        "stance": "open"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 140.5,
+      "end": 141.7,
+      "text": "Bye.",
+      "label": {
+        "block": "exit",
+        "stance": "open"
+      }
+    }
+  ]
+}

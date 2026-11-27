@@ -1,0 +1,14 @@
+{
+  "id": "sample-hostile",
+  "description": "Hand-written 30-second call: the prospect is hostile from the start and the call ends with permission for one email.",
+  "segments": [
+    { "speaker": "them", "start": 0.0, "end": 1.5, "text": "Hello?", "label": { "block": "opener", "stance": "neutral" } },
+    { "speaker": "you", "start": 1.9, "end": 6.0, "text": "Hi, is this Jordan? This is Sam from Brightline, calling about the no-shows at your clinic.", "label": { "block": "opener", "stance": "neutral" } },
+    { "speaker": "them", "start": 6.5, "end": 8.8, "text": "How did you get this number?", "label": { "block": "reluctant", "stance": "hostile" } },
+    { "speaker": "you", "start": 9.3, "end": 13.5, "text": "It's listed on your website. I'll be quick: could I have thirty seconds to explain why I called?", "label": { "block": "hook", "stance": "hostile" } },
+    { "speaker": "them", "start": 14.0, "end": 18.2, "text": "No. I get five of these calls a day. We're not interested, take me off your list.", "label": { "block": "reluctant", "stance": "hostile" } },
+    { "speaker": "you", "start": 18.7, "end": 22.0, "text": "Understood, you get a lot of these. Would it be okay if I sent one email instead?", "label": { "block": "reluctant", "stance": "hostile" } },
+    { "speaker": "them", "start": 22.5, "end": 25.0, "text": "Fine, whatever. Just don't call again.", "label": { "block": "exit", "stance": "hostile" } },
+    { "speaker": "you", "start": 25.4, "end": 28.2, "text": "I won't. Thanks for your time, Jordan.", "label": { "block": "exit", "stance": "hostile" } }
+  ]
+}

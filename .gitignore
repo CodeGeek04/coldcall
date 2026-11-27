@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.local
+dist/
+# Session logs and recordings can hold personal data: keep them out of git.
+sessions/
+.DS_Store
+# Generated call audio (pnpm make-audio)
+transcripts/audio/

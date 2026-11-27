@@ -1,0 +1,33 @@
+{
+  "id": "sample-booked",
+  "description": "Hand-written 2-minute call: gatekeeper, a vendor objection, discovery, pitch, booked meeting. Labels are the intended block and the prospect's stance.",
+  "segments": [
+    { "speaker": "them", "start": 0.0, "end": 2.2, "text": "Good morning, Cedar Dental, this is Maria speaking.", "label": { "block": "gatekeeper", "stance": "neutral" } },
+    { "speaker": "you", "start": 2.6, "end": 6.4, "text": "Hi Maria, this is Sam from Brightline. Could I speak with Dr. Patel, please?", "label": { "block": "gatekeeper", "stance": "neutral" } },
+    { "speaker": "them", "start": 6.8, "end": 9.6, "text": "Can I ask what this is regarding?", "label": { "block": "gatekeeper", "stance": "neutral" } },
+    { "speaker": "you", "start": 10.0, "end": 14.8, "text": "Sure, it's about the no-shows on her schedule. I'll keep it to a minute.", "label": { "block": "gatekeeper", "stance": "neutral" } },
+    { "speaker": "them", "start": 15.2, "end": 17.0, "text": "One moment, I'll see if she's free.", "label": { "block": "gatekeeper", "stance": "neutral" } },
+    { "speaker": "them", "start": 22.0, "end": 23.6, "text": "This is Dr. Patel.", "label": { "block": "opener", "stance": "neutral" } },
+    { "speaker": "you", "start": 24.0, "end": 30.5, "text": "Hi Dr. Patel, Sam from Brightline. We help dental practices cut no-shows, and I'm calling because you opened a second location this year.", "label": { "block": "opener", "stance": "neutral" } },
+    { "speaker": "you", "start": 31.0, "end": 34.2, "text": "Could I have thirty seconds to explain why I called, and you tell me if it's relevant?", "label": { "block": "hook", "stance": "neutral" } },
+    { "speaker": "them", "start": 34.8, "end": 38.9, "text": "Honestly, I'm between patients, and we already have a reminder system.", "label": { "block": "reluctant", "stance": "reluctant" } },
+    { "speaker": "you", "start": 39.4, "end": 43.8, "text": "Makes sense, you already send reminders. Out of curiosity, are no-shows still a problem with them?", "label": { "block": "reluctant", "stance": "reluctant" } },
+    { "speaker": "them", "start": 44.4, "end": 49.5, "text": "I mean, a bit. The texts go out, but people still don't show up, especially on Mondays.", "label": { "block": "discovery", "stance": "neutral" } },
+    { "speaker": "you", "start": 50.0, "end": 53.1, "text": "How many would you say you lose on a typical Monday?", "label": { "block": "discovery", "stance": "neutral" } },
+    { "speaker": "them", "start": 53.6, "end": 59.8, "text": "Maybe three or four slots at the new location. The front desk ends up calling the waitlist by hand.", "label": { "block": "discovery", "stance": "open" } },
+    { "speaker": "you", "start": 60.3, "end": 63.0, "text": "And how long does that take them each morning?", "label": { "block": "discovery", "stance": "open" } },
+    { "speaker": "them", "start": 63.5, "end": 68.4, "text": "Half an hour at least. Maria hates it, honestly. It's the worst part of her Monday.", "label": { "block": "discovery", "stance": "open" } },
+    { "speaker": "you", "start": 69.0, "end": 77.2, "text": "That's the part we fix. When someone cancels, Brightline texts your waitlist automatically and fills the slot, usually within twenty minutes.", "label": { "block": "pitch", "stance": "open" } },
+    { "speaker": "them", "start": 77.8, "end": 81.0, "text": "Does it work with Dentrix? That's what we use at both offices.", "label": { "block": "pitch", "stance": "open" } },
+    { "speaker": "you", "start": 81.5, "end": 85.0, "text": "It does. It syncs both ways, so Maria doesn't have to re-enter anything.", "label": { "block": "pitch", "stance": "open" } },
+    { "speaker": "them", "start": 85.6, "end": 89.6, "text": "Okay. What does it cost? We just spent a lot on the new office.", "label": { "block": "pitch", "stance": "ready" } },
+    { "speaker": "you", "start": 90.1, "end": 96.0, "text": "It depends on the number of chairs. Easiest is a fifteen-minute call where I show it on your schedule. Would Thursday at 12:30 or Friday at 8 work?", "label": { "block": "ask", "stance": "ready" } },
+    { "speaker": "them", "start": 96.6, "end": 100.0, "text": "Friday morning is tough. Thursday lunchtime could work.", "label": { "block": "ask", "stance": "ready" } },
+    { "speaker": "you", "start": 100.4, "end": 103.2, "text": "Great, Thursday at 12:30. What's the best email for the invite?", "label": { "block": "logistics", "stance": "ready" } },
+    { "speaker": "them", "start": 103.7, "end": 107.5, "text": "Send it to drpatel at cedardental dot com, and copy Maria.", "label": { "block": "logistics", "stance": "ready" } },
+    { "speaker": "you", "start": 108.0, "end": 111.4, "text": "Will do. I'll send it right after this call, with Maria copied.", "label": { "block": "logistics", "stance": "ready" } },
+    { "speaker": "them", "start": 111.9, "end": 114.0, "text": "Sounds good. I have to get back to my patient.", "label": { "block": "exit", "stance": "open" } },
+    { "speaker": "you", "start": 114.4, "end": 117.8, "text": "Of course. Thanks, Dr. Patel, talk to you Thursday.", "label": { "block": "exit", "stance": "open" } },
+    { "speaker": "them", "start": 118.2, "end": 119.0, "text": "Bye.", "label": { "block": "exit", "stance": "open" } }
+  ]
+}

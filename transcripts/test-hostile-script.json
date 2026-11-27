@@ -1,0 +1,66 @@
+{
+  "id": "test-hostile-script",
+  "description": "Optional 20-second hostile test. You: Shivam. Them: a friend playing an annoyed prospect.",
+  "segments": [
+    {
+      "speaker": "them",
+      "start": 0.5,
+      "end": 1.7,
+      "text": "Hello?",
+      "label": {
+        "block": "opener",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 2.4,
+      "end": 7.4,
+      "text": "Hi, this is Shivam from Brightline, calling about missed appointments at your clinic.",
+      "label": {
+        "block": "opener",
+        "stance": "neutral"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 8.1,
+      "end": 12.7,
+      "text": "How did you get this number? I'm not interested. Stop calling me.",
+      "label": {
+        "block": "reluctant",
+        "stance": "hostile"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 13.4,
+      "end": 17.6,
+      "text": "Understood, sorry for the interruption. Could I send one email instead?",
+      "label": {
+        "block": "reluctant",
+        "stance": "hostile"
+      }
+    },
+    {
+      "speaker": "them",
+      "start": 18.3,
+      "end": 20.7,
+      "text": "No. Take me off your list.",
+      "label": {
+        "block": "reluctant",
+        "stance": "hostile"
+      }
+    },
+    {
+      "speaker": "you",
+      "start": 21.4,
+      "end": 23.3,
+      "text": "Done. Have a good day.",
+      "label": {
+        "block": "exit",
+        "stance": "hostile"
+      }
+    }
+  ]
+}

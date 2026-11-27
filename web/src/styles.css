@@ -1,0 +1,573 @@
+/* Signal-box panel. Color is reserved for stance; the lit block is plain ink. */
+:root {
+  --panel: #e3e8e1;
+  --panel-2: #d5dcd3;
+  --ink: #18231d;
+  --ink-soft: #4f5d55;
+  --rail: #a3aea6;
+  --on-ink: #f2f5f0;
+  --focus: #2f6db0;
+
+  --stance-hostile: #c23b2e;
+  --stance-reluctant: #c5870f;
+  --stance-neutral: #8d9991;
+  --stance-open: #2f6db0;
+  --stance-ready: #23904a;
+
+  --gutter: clamp(16px, 3vw, 32px);
+  --ease: 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --panel: #18211d;
+    --panel-2: #1f2a25;
+    --ink: #e4ebe5;
+    --ink-soft: #9aa8a0;
+    --rail: #3f4d46;
+    --on-ink: #18211d;
+    --focus: #6aa6e8;
+
+    --stance-hostile: #e2574a;
+    --stance-reluctant: #e3a630;
+    --stance-neutral: #9ba79f;
+    --stance-open: #5c9be0;
+    --stance-ready: #3dba68;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--panel);
+  color: var(--ink);
+  font-family: "B612", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+kbd {
+  font: inherit;
+  font-weight: 700;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto auto;
+  min-height: 100%;
+}
+
+/* Replay controls */
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 10px var(--gutter);
+  background: var(--panel-2);
+  font-size: 14px;
+}
+
+.bar select,
+.button {
+  font: inherit;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--rail);
+  border-radius: 3px;
+  padding: 6px 10px;
+  min-height: 36px;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.button.primary {
+  background: var(--ink);
+  color: var(--on-ink);
+  border-color: var(--ink);
+  font-weight: 700;
+}
+
+.button:disabled,
+.bar select:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.bar-end {
+  margin-left: auto;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  color: var(--ink-soft);
+}
+
+.clock {
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.conn[data-ok="false"] {
+  color: var(--stance-hostile);
+}
+
+/* Heads-up area */
+/* Anchored to the top, so nothing moves as the transcript fills up. */
+.hud {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: clamp(28px, 6vh, 64px);
+  padding: clamp(24px, 6vh, 64px) var(--gutter);
+}
+
+.waiting {
+  color: var(--ink-soft);
+}
+
+/* Track diagram */
+.track {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  min-height: 112px;
+}
+
+/* Nothing confident: dim the map, but never the next move. */
+.track[data-unknown="true"] .section:not([data-next="true"]) {
+  opacity: 0.5;
+}
+
+.section {
+  transition:
+    flex-grow var(--ease),
+    opacity var(--ease);
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: flex-grow var(--ease);
+}
+
+.rail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  height: 8px;
+  padding: 0;
+  overflow: hidden;
+  background: var(--rail);
+  border: 2px solid transparent;
+  border-radius: 2px;
+  transition:
+    height var(--ease),
+    background-color var(--ease);
+}
+
+.caption {
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.caption-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.section:hover .rail {
+  background: var(--ink-soft);
+}
+
+/* Occupied block */
+.section[data-lit="true"] {
+  flex-grow: 4.5;
+}
+
+.section[data-lit="true"] .rail,
+.section[data-runner-up="true"] .rail {
+  padding: 0 14px;
+}
+
+.section[data-lit="true"] .rail {
+  height: 80px;
+  background: var(--ink);
+  color: var(--on-ink);
+}
+
+.section[data-lit="true"] .caption {
+  color: var(--ink);
+}
+
+.lit-name {
+  min-width: 0;
+  font-size: clamp(22px, 3.4vw, 40px);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prob {
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Nothing confident: keep the last block, hatched and dim */
+.track[data-unknown="true"] .section[data-lit="true"] .rail {
+  background: repeating-linear-gradient(135deg, transparent 0 7px, color-mix(in srgb, var(--ink) 18%, transparent) 7px 9px);
+  border: 2px dashed var(--ink);
+  color: var(--ink);
+}
+
+/* Next move: the route set ahead of you. Outlined, as large as the occupied block. */
+.section[data-next="true"] {
+  flex-grow: 4;
+}
+
+.track[data-has-next="true"] .section[data-lit="true"] {
+  flex-grow: 3;
+}
+
+.section[data-next="true"] .rail {
+  height: 80px;
+  padding: 0 14px;
+  background: transparent;
+  border: 4px solid var(--ink);
+  color: var(--ink);
+  animation: route-set 700ms ease-out 1;
+}
+
+.section[data-next="true"] .caption {
+  color: var(--ink);
+}
+
+.next-tag {
+  font-weight: 400;
+}
+
+@keyframes route-set {
+  0%,
+  50% {
+    border-color: transparent;
+  }
+  25%,
+  75%,
+  100% {
+    border-color: var(--ink);
+  }
+}
+
+.advice {
+  display: grid;
+  gap: 10px;
+}
+
+.next-reason {
+  margin: 0;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+/* Close runner-up in a near tie */
+.section[data-runner-up="true"] {
+  flex-grow: 1.8;
+}
+
+.section[data-runner-up="true"] .rail {
+  height: 40px;
+  background: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* Manual override: a bar that drains over the pin's 15 s */
+.drain {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  background: var(--on-ink);
+  transform-origin: left;
+  animation: drain var(--pin-ms) linear forwards;
+}
+
+@keyframes drain {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* Direction and stance */
+.readout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 260px);
+  gap: 32px clamp(24px, 5vw, 72px);
+  align-items: start;
+}
+
+.direction {
+  margin: 0;
+  max-width: 30ch;
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-weight: 700;
+  line-height: 1.22;
+  text-wrap: balance;
+}
+
+.direction[data-unknown="true"] {
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.direction-empty {
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.signal {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px 14px;
+  align-items: center;
+}
+
+.lamp {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--lamp);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--lamp) 22%, transparent);
+  transition:
+    background-color var(--ease),
+    box-shadow var(--ease);
+}
+
+.signal-text {
+  display: grid;
+  gap: 6px;
+}
+
+.stance-name {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.meter {
+  display: block;
+  height: 6px;
+  background: color-mix(in srgb, var(--rail) 55%, transparent);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  width: calc(var(--v) * 100%);
+  background: var(--lamp);
+  transition: width var(--ease);
+}
+
+.readiness-label {
+  font-size: 13px;
+  color: var(--ink-soft);
+  grid-column: 1 / -1;
+  margin-top: 8px;
+}
+
+.meter.readiness {
+  grid-column: 1 / -1;
+}
+
+.meter.readiness > span {
+  background: var(--ink);
+}
+
+/* Transcript */
+.transcript {
+  height: 28vh;
+  overflow-y: auto;
+  padding: 12px var(--gutter);
+  background: var(--panel-2);
+  font-size: 14px;
+}
+
+.transcript ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.transcript li {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 72ch);
+  gap: 12px;
+}
+
+.who {
+  color: var(--ink-soft);
+}
+
+.transcript li[data-speaker="you"] .said {
+  color: var(--ink-soft);
+}
+
+.transcript-empty {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* Footer */
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 24px;
+  padding: 10px var(--gutter);
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+/* Narrow windows: unlit sections keep only their key number */
+@media (max-width: 720px) {
+  .section:not([data-lit="true"]):not([data-next="true"]) .caption-name {
+    display: none;
+  }
+  /* Room for one name only: the next move's. Where you are stays a solid block. */
+  .track[data-has-next="true"] .section[data-lit="true"] {
+    flex-grow: 1.5;
+  }
+  .track[data-has-next="true"] .section[data-lit="true"] .lit-name,
+  .track[data-has-next="true"] .section[data-lit="true"] .caption-name,
+  .next-tag {
+    display: none;
+  }
+  .section[data-next="true"] {
+    flex-grow: 7;
+  }
+  .section[data-lit="true"] {
+    flex-grow: 7;
+  }
+  .readout {
+    grid-template-columns: 1fr;
+  }
+  .bar-end {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+  }
+  .drain,
+  .section[data-next="true"] .rail {
+    animation: none;
+  }
+}
+
+/* Live call controls */
+.levels {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.level {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--ink-soft);
+}
+
+.level-bar {
+  display: block;
+  width: 56px;
+  height: 6px;
+  background: color-mix(in srgb, var(--rail) 55%, transparent);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.level-bar > span {
+  display: block;
+  height: 100%;
+  width: calc(var(--v) * 100%);
+  background: var(--ink);
+  transition: width 90ms linear;
+}
+
+.check {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--ink);
+}
+
+/* Words still being spoken */
+.transcript li.speaking .said {
+  color: var(--ink-soft);
+  font-style: italic;
+}

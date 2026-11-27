@@ -1,0 +1,134 @@
+# The whole map. Edit freely; no code changes needed.
+#
+# Rules:
+# - Describe each block by what is happening in the conversation, in one plain
+#   sentence. Jev only sees these words and the transcript.
+# - `next` is a soft hint for the state machine, not a hard rule. Cold calls loop,
+#   and any block can jump to exit.
+# - Directions are one line. A stance-specific line wins over the block's default.
+# - Optional `examples`: 2 or 3 real utterances per block from your recordings.
+#   They are sent to Jev next to the description.
+
+blocks:
+  - id: gatekeeper
+    describe: Someone other than the target answers, or asks who is calling and why.
+    next: [opener]
+  - id: opener
+    describe: Target is on the line; you are introducing yourself and why you called.
+    next: [hook, reluctant, exit]
+  - id: hook
+    describe: You asked for a moment of attention and they are deciding whether to give it.
+    next: [discovery, reluctant, exit]
+  - id: discovery
+    describe: Prospect is describing their situation, tools or problems.
+    next: [pitch, reluctant, ask]
+  - id: reluctant
+    describe: Prospect is pushing back (not interested, busy, have a vendor, send an email).
+    next: [hook, discovery, exit]
+  - id: pitch
+    describe: You are explaining the offer and they are reacting to it.
+    next: [reluctant, ask]
+  - id: ask
+    describe: A meeting or next step has been proposed and they are answering.
+    next: [logistics, reluctant, exit]
+  - id: logistics
+    describe: Agreed to proceed; time, channel and email are being settled.
+    next: [exit]
+  - id: exit
+    describe: Call is ending, with or without a next step.
+    next: []
+
+# What to do next. On every sentence, Jev checks each move that leaves the block you are in
+# (`from`, or `any`) against the latest turns: is `when` true? A move that is clearly true
+# lights its block up ahead of you, with `because` as the reason, before you start it.
+# Write `when` as one plain fact about what was just said. Keep `because` to a few words.
+moves:
+  - to: opener
+    from: [gatekeeper]
+    when: The person the caller asked for has just come on the line, or just said they are that person.
+    because: the target is on the line
+  - to: hook
+    from: [opener]
+    when: The caller has just said who they are and why they called, and the prospect has not pushed back.
+    because: your intro is done
+  - to: discovery
+    from: [hook, reluctant]
+    when: The prospect just agreed to listen, gave the caller a moment, or agreed to answer a question.
+    because: they gave you a moment
+  - to: pitch
+    from: [discovery]
+    when: The prospect just described a specific problem, cost, or frustration that the caller's offer could solve.
+    because: they named a problem
+  - to: ask
+    from: [discovery, pitch]
+    when: The prospect just asked about price, details, timing, or how to get started, or said the offer sounds interesting or useful.
+    because: they showed interest
+  - to: logistics
+    from: [ask]
+    when: The prospect just agreed to a meeting, a demo, or another next step.
+    because: they said yes
+  - to: reluctant
+    from: [opener, hook, discovery, pitch, ask]
+    when: The prospect just pushed back, for example said they are busy, not interested, already have a solution, or asked for an email instead.
+    because: they pushed back
+  - to: exit
+    from: [logistics]
+    when: The time and contact details for the next step have just been settled.
+    because: the next step is settled
+  - to: exit
+    from: any
+    when: The prospect is wrapping up, for example says they have to go or get back to something, says goodbye, refuses for a second time, or asks not to be called again.
+    because: they are ending the call
+
+# The prospect's attitude right now. Jev reads these descriptions.
+stances:
+  - id: open
+    describe: Friendly and engaged; answers questions and is willing to keep talking.
+  - id: neutral
+    describe: Polite but noncommittal; listening without showing interest or resistance.
+  - id: reluctant
+    describe: Pushing back or trying to end the call (busy, not interested, has a vendor, send an email), but still civil.
+  - id: hostile
+    describe: Annoyed, rude or angry about being called.
+  - id: ready
+    describe: Clear buying intent; asks about next steps, price or timing, or agrees to meet.
+
+# How ready the prospect is, lowest to highest. Shown as a 0 to 1 score.
+# Describe situations, not degrees.
+readiness:
+  - Refuses to engage or wants the call to end now.
+  - Still on the line but shows no interest in the offer.
+  - Curious; asks a question or describes their own situation.
+  - Sees value; asks about details, price or how it would work for them.
+  - Agrees to a next step such as a meeting, demo or follow-up.
+
+directions:
+  reluctant:
+    default: Name the objection back, ask one soft question, do not pitch.
+    by_stance:
+      hostile: Thank them, ask permission to follow up once, exit.
+  discovery:
+    default: Ask about how they handle it today; stay on their words.
+    by_stance:
+      ready: Stop discovering; move to the ask.
+  ask:
+    default: Offer two concrete times.
+  # Draft lines for the remaining blocks. Rewrite them in your own words.
+  gatekeeper:
+    default: Be brief and plain; ask for the person by name.
+  opener:
+    default: Who you are and why you called, in one breath, then pause.
+  hook:
+    default: Ask for thirty seconds, then stop talking and let them decide.
+    by_stance:
+      hostile: Thank them, ask permission to follow up once, exit.
+  pitch:
+    default: One outcome in their words, then check how it lands.
+    by_stance:
+      ready: Stop pitching; move to the ask.
+  logistics:
+    default: Confirm time, channel and email; repeat them back.
+  exit:
+    default: Thank them, confirm any next step, end cleanly.
+
+unknown_direction: Unclear. It is on you.
